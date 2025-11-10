@@ -16,13 +16,14 @@ describe('AppController (e2e)', () => {
   });
 
   it('/GET example', async () => {
-    return request(app.getHttpServer())
+    const response = await request(app.getHttpServer())
       .get('/example')
-      .expect(200)
-      .expect('Hello World');
+      .expect(200);
+
+    expect(response.text).toBe('Hello World');
   });
 
   afterAll(async () => {
-    await app.close(); // ✅ correct
+    await app.close();
   });
 });
